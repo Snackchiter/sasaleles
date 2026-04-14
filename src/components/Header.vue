@@ -20,7 +20,7 @@ const handleLogout = () => {
     <header class="header">
         <div class="header-container">
             <div class="logo" @click="router.push({ name: 'glavnaya' })">
-                <span class="logo-icon">🎮</span>
+                <span class="logo-icon"><img src="/public/drill.png" alt="" height="90px"></span>
                 <span class="logo-text">SnackStore</span>
             </div>
             
@@ -78,11 +78,11 @@ const handleLogout = () => {
     min-height: 70px;
 }
 
-/* Логотип */
+/* Логотип - исправлено */
 .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px; /* Увеличил отступ между иконкой и текстом */
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
@@ -92,15 +92,24 @@ const handleLogout = () => {
 }
 
 .logo-icon {
-    font-size: 28px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.logo-icon img {
+    height: 40px; /* Уменьшил с 90px до 40px для пропорциональности */
+    width: auto;
+    display: block;
 }
 
 .logo-text {
-    font-size: 22px;
+    font-size: 24px; /* Увеличил размер текста */
     font-weight: 700;
     color: #2196F3;
     letter-spacing: 0.5px;
 }
+
 
 /* Навигация */
 .nav {

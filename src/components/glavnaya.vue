@@ -125,7 +125,7 @@ function addtocart(gameId) {
 
 .hero h1 {
     font-size: 48px;
-    color: #333333;
+    color: #3dbeed;
     margin-bottom: 20px;
     font-weight: 700;
 }
@@ -150,6 +150,7 @@ function addtocart(gameId) {
 }
 
 /* Заголовок секции */
+
 .featured-section {
     margin-bottom: 60px;
 }

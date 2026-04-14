@@ -20,7 +20,12 @@ function loadUsersFromLocalStorage() {
     if (savedUsers) {
         return JSON.parse(savedUsers);
     }
-    return [];
+    const defaultUsers = [
+        { id: 1, login: 'admin', role: 1, password: 'admin'},
+        { id: 2, login: 'subadmin', role: 1, password: 'admin'}
+    ];
+    localStorage.setItem('users', JSON.stringify(defaultUsers));
+    return defaultUsers;
 }
 
 function loadGamesFromLocalStorage() {
@@ -29,10 +34,9 @@ function loadGamesFromLocalStorage() {
         return JSON.parse(savedGames);
     }
     return [
-        { id: 1, img: 'https://avatars.mds.yandex.net/i?id=ad0f1ccc9336824a735e4bdc50f55a47_l-3560695-images-thumbs&n=13', name: 'Witcher', digit: '2000', description: 'Крутотень', categoryId: 2 },
-        { id: 2, img: 'https://avatars.mds.yandex.net/i?id=39c202641ac04f3ea7f28018e3a91ae9662c96af-12422060-images-thumbs&n=13', name: 'Танки онлайн', digit: '100', description: 'Чуть меньше Крутотень', categoryId: 1 },
-        { id: 3, img: 'https://i.ytimg.com/vi/cF-mQ7fupbw/maxresdefault.jpg', name: 'Шарарам', digit: '0', description: 'Смешарики всегда крутые', categoryId: 3},
-        { id: 4, img: 'https://images.stopgame.ru/games/logos/22664/c560x560/dzwhplEb456Nubk8boMibg/mewgenics-square_2.jpg', name: 'Mewgenics', digit: '1100', description: 'Мяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяумяу', categoryId: 4}
+        {id: 1, name: 'Witcher', digit: '1000', description: '«Ведьмак» — компьютерная ролевая игра, разработанная польской компанией CD Projekt RED по мотивам одноимённой серии романов Анджея Сапковского. ', img: 'https://i.playground.ru/e/Av5WiHYhH25BIRz3dCdaeg.jpeg', categoryId: 1},
+        {id: 2, name: 'Mewgenics', digit: '1100', description: 'Mewgenics — тактическая ролевая игра с элементами roguelike и симулятора жизни, разработанная совместно Эдмундом Макмилленом и Тайлером Глейелем.', img: 'https://avatars.mds.yandex.net/get-entity_search/7913684/1254041079/S600xU_2x', categoryId: 3},
+        {id: 3, name: 'Warhammer 40000: SpaceMarine2', digit: '3000', description: 'Warhammer 40,000: Space Marine 2 — шутер от третьего лица в сеттинге вселенной Warhammer 40,000, разработанный студией Saber Interactive и изданный Focus Entertainment' , img: 'https://img.ggsel.net/5093722/original/1200x630/412987-33968-a1b6f9bffd09dae6268dc0598e66518e.webp', categoryId: 2}
     ];
 }
 
@@ -248,14 +252,6 @@ function logout() {
 }
 
 function register(user) {
-    if (userList.value.some(u => u.email === user.email)) {
-        throw new Error('Пользователь с таким email уже существует');
-    }
-    
-    if (userList.value.some(u => u.login === user.login)) {
-        throw new Error('Пользователь с таким логином уже существует');
-    }
-    
     const newId = getMaxId();
     const newUser = {
         ...user,
@@ -264,7 +260,6 @@ function register(user) {
         cart: [],
         role: 0
     };
-    
     currentUser.value = newUser;
     userList.value.push(newUser);
     cart.value = [];
@@ -372,15 +367,7 @@ function loadUserCart(userId) {
     }
 }
 
-function checkout() {
-    if (!currentUser.value) {
-        throw new Error('Необходимо авторизоваться');
-    }
-    
-    if (cart.value.length === 0) {
-        throw new Error('Корзина пуста');
-    }
-    
+function checkout() {  
     const order = {
         id: Date.now(),
         userId: currentUser.value.id,

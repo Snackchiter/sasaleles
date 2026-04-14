@@ -3,7 +3,7 @@ import useUsers from '../composables/useUsers';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const { gameList, delGame } = useUsers();
+const { gameList, delGame, delUser, userList } = useUsers();
 </script>
 
 <template>
@@ -28,7 +28,6 @@ const { gameList, delGame } = useUsers();
             </div>
         </div>
     </div>
-    
     <div v-if="gameList.length < 1" class="nettovarov">
         <p>Нет доступных игр</p>
         <button class="add-first-game" @click="router.push({name: 'add'})">Добавить первую игру</button>

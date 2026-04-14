@@ -9,18 +9,33 @@ const { login } = useUsers();
 const loginValue = ref('');
 const password = ref('');
 const error = ref('');
-const isLoading = ref(false);
+const logerror = ref('');
+const passerror = ref('');
+
+function validateForm() {
+    let isValid = true;
+    logerror.value = '';
+    passerror.value = '';
+    error.value = '';
+
+    if (!loginValue.value.trim()) {
+        logerror.value = 'Введите логин';
+        isValid = false;
+    }
+
+    if (!password.value.trim()) {
+        passerror.value = 'Введите пароль';
+        isValid = false;
+    }
+
+    return isValid;
+}
 
 function handleSubmit() {
-    error.value = '';
-    
-    if (!loginValue.value.trim() || !password.value.trim()) {
-        error.value = 'Заполните все поля';
+    if (!validateForm()) {
         return;
     }
-    
-    isLoading.value = true;
-    
+
     try {
         const user = login(loginValue.value, password.value);
         if (user) {
@@ -30,8 +45,6 @@ function handleSubmit() {
         }
     } catch (err) {
         error.value = err.message;
-    } finally {
-        isLoading.value = false;
     }
 }
 </script>
@@ -40,7 +53,7 @@ function handleSubmit() {
     <div class="login-container">
         <div class="login-card">
             <div class="login-header">
-                <div class="login-icon">🎮</div>
+                <div class="login-icon"><img src="/public/drill.png" alt="" height="90px"></div>
                 <h3>Вход в аккаунт</h3>
                 <p class="login-subtitle">Добро пожаловать обратно!</p>
             </div>
@@ -51,7 +64,8 @@ function handleSubmit() {
                         <span class="label-icon">🧍</span>
                         Логин
                     </label>
-                    <input v-model="loginValue" type="text" placeholder="Введите логин" :disabled="isLoading" required />
+                    <input v-model="loginValue" type="text" placeholder="Введите логин">
+                    <span v-if="logerror" class="error-message">{{ logerror }}</span>
                 </div>
                 
                 <div class="form-group">
@@ -59,15 +73,16 @@ function handleSubmit() {
                         <span class="label-icon">🔒︎</span>
                         Пароль
                     </label>
-                    <input v-model="password" type="password" placeholder="Введите пароль" :disabled="isLoading" required />
+                    <input v-model="password" type="password" placeholder="Введите пароль">
+                    <span v-if="passerror" class="error-message">{{ passerror }}</span>
                 </div>
                 
-                <button type="submit" class="login-btn" :disabled="isLoading">
-                    <span v-if="!isLoading">Войти</span>
-                    <span v-else class="loading-text">
-                        <span class="spinner-small"></span>
-                        Вход...
-                    </span>
+                <div v-if="error" class="error general-error">  
+                    {{ error }}
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span>Войти</span>
                 </button>
                 
                 <div class="register-link">
@@ -80,6 +95,18 @@ function handleSubmit() {
 </template>
 
 <style scoped>
+.login-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.login-icon img {
+    width: auto;
+    height: 90px;
+    display: block;
+}
 .login-container {
     min-height: calc(100vh - 200px);
     display: flex;
@@ -170,6 +197,17 @@ function handleSubmit() {
     background: #f5f5f5;
     cursor: not-allowed;
     opacity: 0.7;
+}
+
+.error-message {
+    color: #c62828;
+    font-size: 13px;
+    margin-top: 4px;
+    padding-left: 4px;
+}
+
+.general-error {
+    margin-top: -10px;
 }
 
 .login-btn {
