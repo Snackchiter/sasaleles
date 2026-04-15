@@ -223,7 +223,6 @@ function closeError() {
     box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
-/* Содержимое корзины */
 .cart-content {
     display: grid;
     grid-template-columns: 1fr 350px;
@@ -348,7 +347,6 @@ function closeError() {
     transform: scale(1.1);
 }
 
-/* Сводка */
 .cart-summary {
     background: #f5f5f5;
     border-radius: 12px;
@@ -432,7 +430,6 @@ function closeError() {
     border-color: #f44336;
 }
 
-/* Модальное окно */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -541,7 +538,6 @@ function closeError() {
     background: #F57C00;
 }
 
-/* Уведомление об ошибке */
 .error-toast {
     position: fixed;
     bottom: 30px;
@@ -577,7 +573,6 @@ function closeError() {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* Анимации */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -602,71 +597,6 @@ function closeError() {
     to {
         opacity: 1;
         transform: translateX(0);
-    }
-}
-
-/* Адаптивность */
-@media (max-width: 900px) {
-    .cart-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .cart-summary {
-        position: static;
-    }
-}
-
-@media (max-width: 700px) {
-    .cart-item {
-        grid-template-columns: 80px 1fr;
-        gap: 10px;
-        padding: 12px;
-    }
-    
-    .item-image-wrapper {
-        width: 80px;
-        height: 80px;
-        grid-row: span 3;
-    }
-    
-    .item-quantity {
-        grid-column: 2;
-        justify-content: flex-start;
-    }
-    
-    .item-total {
-        grid-column: 2;
-        text-align: left;
-    }
-    
-    .remove-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-    
-    .cart-item {
-        position: relative;
-    }
-}
-
-@media (max-width: 500px) {
-    .cart-page {
-        padding: 20px 10px;
-    }
-    
-    .cart-title {
-        font-size: 26px;
-    }
-    
-    .modal-footer {
-        flex-direction: column;
-    }
-    
-    .error-toast {
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
     }
 }
 </style>

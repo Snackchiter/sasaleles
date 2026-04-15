@@ -234,21 +234,6 @@ function handleSubmit() {
     cursor: not-allowed;
 }
 
-.loading-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.spinner-small {
-    width: 18px;
-    height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
 
 .register-link {
     text-align: center;
@@ -289,19 +274,5 @@ function handleSubmit() {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
-}
-
-@media (max-width: 500px) {
-    .login-card {
-        padding: 30px 20px;
-    }
-    
-    .login-header h3 {
-        font-size: 24px;
-    }
-    
-    .login-icon {
-        font-size: 40px;
-    }
 }
 </style>

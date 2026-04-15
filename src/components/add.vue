@@ -52,14 +52,14 @@ function add() {
         <h2 class="page-title">Добавление новой игры</h2>
         
         <div class="upload-section">
-            <label class="upload-label">
+            <label class="upload-label" for="fileInput">
                 <span class="upload-icon">🖼️</span>
                 <span>Выберите изображение</span>
             </label>
-            <input class="file-input" type="file" accept="image/jpeg,image/png,image/jpg" @change="handleImageUpload">
+            <input id="fileInput" class="file-input" type="file" accept="image/jpeg,image/png,image/jpg" @change="handleImageUpload">
             <div v-if="game.img" class="image-preview">
                 <img :src="game.img" alt="Предпросмотр">
-                <button class="remove-image" @click="game.img = ''">✖</button>
+                <button type="button" class="remove-image" @click="game.img = ''">✖</button>
             </div>
             <div v-else class="upload-placeholder">
                 <span>🗁 JPEG или PNG</span>
@@ -76,6 +76,7 @@ function add() {
             <div class="form-group">
                 <label class="form-label">Цена (₽)</label>
                 <input class="form-input" type="text" v-model="game.digit" placeholder="Введите цену">
+                <span v-if="!game.digit.trim()" class="error-text">Введите цену</span>
                 <span v-if="isNaN(game.digit) && game.digit !== ''" class="error-text">Введите только число</span>
             </div>
             
@@ -299,19 +300,5 @@ function add() {
 .btn-submit:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-
-@media (max-width: 768px) {
-    .add-game-container {
-        padding: 20px 15px;
-    }
-    
-    .page-title {
-        font-size: 24px;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
 }
 </style>

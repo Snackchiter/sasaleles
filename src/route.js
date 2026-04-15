@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router"
 import admin from "./components/admin.vue"
 import add from "./components/add.vue"
 import tovar from "./components/tovar.vue"
-import pageNone from "./components/404.vue"
+import pagenone from "./components/pagenone.vue"
 import tovaredit from "./components/tovaredit.vue"
 import tovarshow from "./components/tovarshow.vue"
 import glavnaya from "./components/glavnaya.vue"
@@ -15,7 +15,7 @@ import cart from "./components/cart.vue"
 import catalog from "./components/catalog.vue"
 import orders from "./components/orders.vue"
 const routes = [
-    { path: '/orders', component: orders, name: 'orders'},
+    { path: '/orders', component: orders, name: 'orders', meta: { requiresAuth: true }},
     { path: '/catalog', component: catalog, name: 'catalog' },
     { path: '/cart', component: cart, name: 'cart', meta: { requiresAuth: true } },
     {
@@ -31,35 +31,16 @@ const routes = [
     },
     { path: '/log', component: log, name: 'log', meta: { guest: true } },
     { path: '/reg', component: reg, name: 'reg', meta: { guest: true } },
-    { 
-        path: '/admin', 
-        component: admin, 
-        meta: { requiresAuth: true, requiresAdmin: true }, 
-        name: 'admin' 
-    },
-    { 
-        path: '/add', 
-        component: add, 
-        meta: { requiresAuth: true, requiresAdmin: true }, 
-        name: 'add' 
-    },
-    {
-        path: '/tovar/:id([0-9]*)', 
-        component: tovar, 
-        name: 'tovar', 
-        children: [
-            { 
-                path: 'edit', 
-                component: tovaredit, 
-                meta: { requiresAuth: true, requiresAdmin: true }, 
-                name: 'tovar-edit' 
-            },
+    { path: '/admin', component: admin, meta: { requiresAuth: true, requiresAdmin: true }, name: 'admin' },
+    { path: '/add', component: add, meta: { requiresAuth: true, requiresAdmin: true }, name: 'add' },
+    { path: '/tovar/:id([0-9]*)', component: tovar, name: 'tovar', children: [
+            { path: 'edit', component: tovaredit, meta: { requiresAuth: true, requiresAdmin: true }, name: 'tovar-edit'},
             { path: 'show', component: tovarshow, name: 'tovar-show' },
             { path: '', redirect: 'show' }
         ]
     },
-    { path: '/:pathName(.*)', component: pageNone, name: '404' },
-    { path: '/', component: glavnaya, name: 'glavnaya' }
+    { path: '/', component: glavnaya, name: 'glavnaya' },
+    { path: '/:pathName(.*)', component: pagenone, name: 'pagenone' }
 ]
 
 export const router = createRouter({
@@ -73,19 +54,15 @@ router.beforeEach((to, from, next) => {
     const isAuthenticated = !!currentUser.value
     const userIsAdmin = isAdmin()
     if (to.meta.requiresAuth && !isAuthenticated) {
-        next({ name: 'log', query: { redirect: to.fullPath } })
+        next({ name: 'log' })
         return
     }
     if (to.meta.requiresAdmin && !userIsAdmin) {
-        next({ name: 'glavnaya' })
+        next({ name: 'pagenone' })
         return
     }
     if (to.meta.guest && isAuthenticated) {
         next({ name: 'lichkab' })
-        return
-    }
-    if (to.meta.Role === 1 && !userIsAdmin) {
-        next({ name: 'glavnaya' })
         return
     }
     next()

@@ -96,11 +96,9 @@ const samecategory = computed(() => {
             <h2>Товар не найден</h2>
             <button class="back-catalog-btn" @click="router.push({ name: 'catalog' })">Вернуться в каталог</button>
         </div>
-
-        <!-- Похожие игры -->
+        <h2 class="similar-title">Похожие игры</h2>
         <div v-if="samecategory.length > 0" class="similar-games-section">
             <div class="section-header">
-                <h2 class="similar-title">Похожие игры</h2>
                 <div class="similar-count">Найдено: {{ samecategory.length }}</div>
             </div>
             
@@ -120,6 +118,11 @@ const samecategory = computed(() => {
                     </div>
                 </div>
             </div>
+        </div>
+        <div v-else class="not-found">
+            <span class="not-found-icon"><img src="/public/homyak.png" height="100px" alt=""></span>
+            <h2>Товар не найден</h2>
+            <button class="back-catalog-btn" @click="router.push({ name: 'catalog' })">Вернуться в каталог</button>
         </div>
     </div>
 </template>
@@ -356,7 +359,6 @@ const samecategory = computed(() => {
     box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
-/* Похожие игры */
 .similar-games-section {
     margin-top: 50px;
     padding-top: 30px;
@@ -501,69 +503,5 @@ const samecategory = computed(() => {
 
 .similar-game-btn:hover .btn-arrow {
     transform: translateX(3px);
-}
-
-@media (max-width: 800px) {
-    .product-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        padding: 20px;
-    }
-    
-    .product-name {
-        font-size: 26px;
-    }
-    
-    .product-price {
-        font-size: 30px;
-    }
-    
-    .similar-title {
-        font-size: 24px;
-    }
-    
-    .similar-games-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-    }
-}
-
-@media (max-width: 500px) {
-    .product-page {
-        padding: 20px 15px;
-    }
-    
-    .product-header {
-        padding: 15px 20px;
-    }
-    
-    .product-content {
-        padding: 20px 15px;
-    }
-    
-    .product-name {
-        font-size: 22px;
-    }
-    
-    .product-price {
-        font-size: 26px;
-    }
-    
-    .cart-btn {
-        padding: 14px 20px;
-        font-size: 16px;
-    }
-    
-    .similar-title {
-        font-size: 20px;
-    }
-    
-    .similar-games-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .similar-game-image-wrapper {
-        height: 200px;
-    }
 }
 </style>

@@ -88,7 +88,7 @@ function handleSubmit() {
                         <span class="label-icon">🧍</span>
                         Логин
                     </label>
-                    <input v-model="login" type="text" placeholder="Придумайте логин" :class="{ error: loginError }" />
+                    <input v-model="login" type="text" placeholder="Придумайте логин"/>
                     <p v-if="loginError" class="field-error">{{ loginError }}</p>
                 </div>
 
@@ -97,7 +97,7 @@ function handleSubmit() {
                         <span class="label-icon">✉︎</span>
                         Почта
                     </label>
-                    <input v-model="email" type="email" placeholder="example@mail.ru" :class="{ error: emailError }" />
+                    <input v-model="email" type="email" placeholder="example@mail.ru"/>
                     <p v-if="emailError" class="field-error">{{ emailError }}</p>
                 </div>
 
@@ -295,22 +295,6 @@ function handleSubmit() {
     cursor: not-allowed;
 }
 
-.loading-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.spinner-small {
-    width: 18px;
-    height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
 .login-link {
     text-align: center;
     font-size: 14px;
@@ -328,28 +312,5 @@ function handleSubmit() {
 .login-link a:hover {
     color: #1976D2;
     text-decoration: underline;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@media (max-width: 600px) {
-    .register-card {
-        padding: 30px 20px;
-    }
-    
-    .register-header h3 {
-        font-size: 24px;
-    }
-    
-    .register-icon {
-        font-size: 40px;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
 }
 </style>

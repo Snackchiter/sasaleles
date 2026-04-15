@@ -8,17 +8,17 @@
             <div class="footer-section">
                 <h4 class="footer-subtitle">Контакты</h4>
                 <div class="footer-links">
-                    <a href="mailto:support@gamestore.ru" class="footer-link">support@Snackstore.ru</a>
-                    <a href="tel:+78001234567" class="footer-link">8 (800) 123-45-67</a>
+                    <a class="footer-link">support@Snackstore.ru</a>
+                    <a class="footer-link">8 (800) 123-45-67</a>
                 </div>
             </div>
             
             <div class="footer-section">
                 <h4 class="footer-subtitle">Мы в соцсетях</h4>
                 <div class="social-links">
-                    <a href="#" class="social-link" title="Telegram"><img src="/public/telegram.png" height="30px" alt=""></a>
-                    <a href="#" class="social-link" title="Discord"><img src="/public/discord.png" alt="" height="30px"></a>
-                    <a href="#" class="social-link" title="Youtube"><img src="/public/youtube.png" alt="" height="30px"></a>
+                    <a class="social-link"  title="Telegram"><img src="/public/telegram.png" height="30px" alt=""></a>
+                    <a class="social-link" title="Discord"><img src="/public/discord.png" alt="" height="30px"></a>
+                    <a class="social-link" title="Youtube"><img src="/public/youtube.png" alt="" height="30px"></a>
                 </div>
             </div>
         </div>
@@ -126,47 +126,5 @@
     color: #666666;
     font-size: 13px;
     margin: 0;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-        padding: 40px 20px 20px;
-    }
-    
-    .footer-links {
-        align-items: center;
-    }
-    
-    .footer-link {
-        width: auto;
-    }
-    
-    .footer-link:hover {
-        transform: translateX(0) translateY(-2px);
-    }
-    
-    .social-links {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-title {
-        font-size: 20px;
-    }
-    
-    .footer-subtitle {
-        font-size: 15px;
-    }
-    
-    .social-link {
-        width: 35px;
-        height: 35px;
-        font-size: 18px;
-    }
 }
 </style>

@@ -78,11 +78,10 @@ const handleLogout = () => {
     min-height: 70px;
 }
 
-/* Логотип - исправлено */
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px; /* Увеличил отступ между иконкой и текстом */
+    gap: 12px;
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
@@ -98,20 +97,20 @@ const handleLogout = () => {
 }
 
 .logo-icon img {
-    height: 40px; /* Уменьшил с 90px до 40px для пропорциональности */
+    height: 40px;
     width: auto;
     display: block;
 }
 
 .logo-text {
-    font-size: 24px; /* Увеличил размер текста */
+    font-size: 24px;
     font-weight: 700;
     color: #2196F3;
     letter-spacing: 0.5px;
 }
 
 
-/* Навигация */
+
 .nav {
     display: flex;
     gap: 5px;
@@ -163,7 +162,7 @@ const handleLogout = () => {
     padding: 0 5px;
 }
 
-/* Действия пользователя */
+
 .user-actions {
     display: flex;
     gap: 8px;
@@ -247,94 +246,5 @@ const handleLogout = () => {
 
 .logout-icon {
     font-size: 16px;
-}
-
-/* Адаптивность */
-@media (max-width: 900px) {
-    .header-container {
-        flex-wrap: wrap;
-        min-height: auto;
-        padding: 12px 20px;
-    }
-    
-    .logo {
-        order: 1;
-    }
-    
-    .nav {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        margin-top: 12px;
-    }
-    
-    .user-actions {
-        order: 2;
-    }
-    
-    .logo-text {
-        font-size: 18px;
-    }
-    
-    .nav-link span:not(.cart-icon) {
-        display: none;
-    }
-    
-    .nav-link {
-        padding: 10px 12px;
-    }
-    
-    .cart-badge {
-        top: 0;
-        right: 0;
-    }
-    
-    .admin-btn span:not(.admin-icon),
-    .profile-btn span:not(.profile-icon),
-    .login-btn span:not(.login-icon),
-    .logout-btn span:not(.logout-icon) {
-        display: none;
-    }
-    
-    .admin-btn,
-    .profile-btn,
-    .login-btn,
-    .logout-btn {
-        padding: 10px 12px;
-    }
-}
-
-@media (max-width: 500px) {
-    .header-container {
-        padding: 10px 15px;
-    }
-    
-    .logo-icon {
-        font-size: 24px;
-    }
-    
-    .logo-text {
-        font-size: 16px;
-    }
-    
-    .nav {
-        gap: 2px;
-    }
-    
-    .nav-link {
-        padding: 8px 10px;
-        font-size: 14px;
-    }
-    
-    .user-actions {
-        gap: 4px;
-    }
-    
-    .admin-btn,
-    .profile-btn,
-    .login-btn,
-    .logout-btn {
-        padding: 8px 10px;
-    }
 }
 </style>

@@ -20,12 +20,10 @@ function loadUsersFromLocalStorage() {
     if (savedUsers) {
         return JSON.parse(savedUsers);
     }
-    const defaultUsers = [
+    return [
         { id: 1, login: 'admin', role: 1, password: 'admin'},
         { id: 2, login: 'subadmin', role: 1, password: 'admin'}
-    ];
-    localStorage.setItem('users', JSON.stringify(defaultUsers));
-    return defaultUsers;
+    ];;
 }
 
 function loadGamesFromLocalStorage() {
@@ -34,9 +32,9 @@ function loadGamesFromLocalStorage() {
         return JSON.parse(savedGames);
     }
     return [
-        {id: 1, name: 'Witcher', digit: '1000', description: '«Ведьмак» — компьютерная ролевая игра, разработанная польской компанией CD Projekt RED по мотивам одноимённой серии романов Анджея Сапковского. ', img: 'https://i.playground.ru/e/Av5WiHYhH25BIRz3dCdaeg.jpeg', categoryId: 1},
+        {id: 1, name: 'Witcher', digit: '1000', description: '«Ведьмак» — компьютерная ролевая игра, разработанная польской компанией CD Projekt RED по мотивам одноимённой серии романов Анджея Сапковского. ', img: 'https://i.playground.ru/e/Av5WiHYhH25BIRz3dCdaeg.jpeg', categoryId: 2},
         {id: 2, name: 'Mewgenics', digit: '1100', description: 'Mewgenics — тактическая ролевая игра с элементами roguelike и симулятора жизни, разработанная совместно Эдмундом Макмилленом и Тайлером Глейелем.', img: 'https://avatars.mds.yandex.net/get-entity_search/7913684/1254041079/S600xU_2x', categoryId: 3},
-        {id: 3, name: 'Warhammer 40000: SpaceMarine2', digit: '3000', description: 'Warhammer 40,000: Space Marine 2 — шутер от третьего лица в сеттинге вселенной Warhammer 40,000, разработанный студией Saber Interactive и изданный Focus Entertainment' , img: 'https://img.ggsel.net/5093722/original/1200x630/412987-33968-a1b6f9bffd09dae6268dc0598e66518e.webp', categoryId: 2}
+        {id: 3, name: 'Warhammer 40000: SpaceMarine2', digit: '3000', description: 'Warhammer 40,000: Space Marine 2 — шутер от третьего лица в сеттинге вселенной Warhammer 40,000, разработанный студией Saber Interactive и изданный Focus Entertainment' , img: 'https://img.ggsel.net/5093722/original/1200x630/412987-33968-a1b6f9bffd09dae6268dc0598e66518e.webp', categoryId: 1}
     ];
 }
 
@@ -87,7 +85,6 @@ watch(
         try {
             saveUsersToLocalStorage(newUsers);
         } catch (error) {
-            console.error('Ошибка сохранения пользователей:', error);
         }
     },
     { deep: true }
@@ -99,7 +96,6 @@ watch(
         try {
             saveGamesToLocalStorage(newGames);
         } catch (error) {
-            console.error('Ошибка сохранения игр:', error);
         }
     },
     { deep: true }
@@ -111,7 +107,6 @@ watch(
         try {
             saveCurrentUserToStorage(newCurrentUser);
         } catch (error) {
-            console.error('Ошибка сохранения текущего пользователя:', error);
         }
     },
     { deep: true }
@@ -202,7 +197,6 @@ function isAdmin() {
 
 function changeUserRole(userId, newRole) {
     if (!isAdmin()) {
-        console.error('Недостаточно прав для изменения роли');
         return false;
     }
     
@@ -374,7 +368,6 @@ function checkout() {
         items: JSON.parse(JSON.stringify(cart.value)),
         total: getCartTotal(),
         date: new Date().toISOString(),
-        status: 'pending'
     };
     
     const orders = loadOrdersFromLocalStorage();
@@ -424,7 +417,6 @@ export default function useUsers() {
         getCartItemCount,
         checkout,
         getUserOrders,
-        // ✅ Новые функции для работы с ролями
         getUserRole,
         isAdmin,
         changeUserRole

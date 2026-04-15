@@ -150,7 +150,6 @@ const clearSearch = () => {
     font-weight: 600;
 }
 
-/* Панель фильтров */
 .filters-panel {
     display: flex;
     gap: 15px;
@@ -259,7 +258,6 @@ const clearSearch = () => {
     box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
 }
 
-/* Информация о фильтрах */
 .filter-info {
     display: flex;
     justify-content: space-between;
@@ -302,7 +300,7 @@ const clearSearch = () => {
     font-size: 14px;
 }
 
-/* Сетка товаров */
+
 .products-wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -429,7 +427,6 @@ const clearSearch = () => {
     border-top: 1px solid #c8e6c9;
 }
 
-/* Нет результатов */
 .no-results {
     text-align: center;
     padding: 80px 20px;
@@ -449,38 +446,4 @@ const clearSearch = () => {
     margin-bottom: 25px;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .catalog-container {
-        padding: 20px 15px;
-    }
-    
-    .catalog-title {
-        font-size: 26px;
-    }
-    
-    .filters-panel {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .search-container,
-    .categories-filter {
-        width: 100%;
-    }
-    
-    .filter-info {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .products-wrapper {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .product-image-wrapper {
-        height: 180px;
-    }
-}
 </style>

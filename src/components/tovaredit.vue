@@ -386,32 +386,4 @@ function edit() {
     opacity: 0.5;
     cursor: not-allowed;
 }
-
-@media (max-width: 600px) {
-    .edit-game-container {
-        padding: 20px 15px;
-    }
-    
-    .edit-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    
-    .edit-title {
-        font-size: 24px;
-    }
-    
-    .edit-card {
-        padding: 20px;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .image-preview img {
-        max-width: 100%;
-    }
-}
 </style>

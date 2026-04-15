@@ -5,13 +5,15 @@ import useUsers from '../composables/useUsers';
 
 const emit = defineEmits(['edit']);
 const router = useRouter();
-const { logout, currentUser, I} = useUsers();
+const { logout, currentUser} = useUsers();
 
 function handleLogout() {
     logout();
     router.push({ name: 'log' });
 }
-
+const curruser = computed(()=>{
+    return currentUser.value.login
+})
 const isAuthenticated = computed(() => {
     return currentUser.value && currentUser.value.login;
 });
@@ -22,9 +24,9 @@ const isAuthenticated = computed(() => {
         <template v-if="isAuthenticated">
             <div class="profile-header">
                 <div class="user-info">
-                    <div class="user-avatar">{{ currentUser.login.charAt(0).toUpperCase() }}</div>
+                    <div class="user-avatar">{{ curruser.charAt(0).toUpperCase() }}</div>
                     <div class="user-details">
-                        <h2>{{ currentUser.login }}</h2>
+                        <h2>{{ curruser }}</h2>
                     </div>
                 </div>
                 <div class="profile-actions">
@@ -93,7 +95,6 @@ const isAuthenticated = computed(() => {
     width: 100%;
 }
 
-/* Заголовок профиля */
 .profile-header {
     display: flex;
     justify-content: space-between;
@@ -188,7 +189,6 @@ const isAuthenticated = computed(() => {
     font-size: 16px;
 }
 
-/* Данные пользователя */
 .user-data {
     padding: 10px 0;
 }
@@ -253,8 +253,6 @@ const isAuthenticated = computed(() => {
     color: #999999;
     font-weight: normal;
 }
-
-/* Гость */
 .guest-state {
     text-align: center;
     padding: 40px 20px;
@@ -296,60 +294,5 @@ const isAuthenticated = computed(() => {
     background: #1976D2;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
-}
-
-/* Адаптивность */
-@media (max-width: 700px) {
-    .profile-header {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-    
-    .user-info {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .profile-actions {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .edit-btn,
-    .logout-btn {
-        flex: 1;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 500px) {
-    .user-avatar {
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
-    }
-    
-    .user-details h2 {
-        font-size: 22px;
-    }
-    
-    .profile-actions {
-        flex-direction: column;
-    }
-    
-    .data-item {
-        padding: 12px 15px;
-    }
-    
-    .data-icon {
-        font-size: 20px;
-        width: 35px;
-        height: 35px;
-    }
-    
-    .data-value {
-        font-size: 15px;
-    }
 }
 </style>

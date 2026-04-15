@@ -28,17 +28,8 @@ function saveEdit() {
         </div>
         
         <div class="profile-content">
-            <LichkabShow 
-                v-if="!isEditing" 
-                :user="currentUser" 
-                @edit="startEdit"
-            />
-            <LichkabEdit 
-                v-else 
-                :user="currentUser"
-                @cancel="cancelEdit"
-                @save="saveEdit"
-            />
+            <LichkabShow v-if="!isEditing" :user="currentUser" @edit="startEdit"/>
+            <LichkabEdit v-else :user="currentUser" @cancel="cancelEdit" @save="saveEdit"/>
         </div>
     </div>
 </template>
@@ -76,32 +67,5 @@ function saveEdit() {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .profile-container {
-        padding: 20px 15px;
-    }
-    
-    .profile-title {
-        font-size: 28px;
-    }
-    
-    .profile-subtitle {
-        font-size: 14px;
-    }
-    
-    .profile-content {
-        padding: 20px 15px;
-    }
-}
 
-@media (max-width: 480px) {
-    .profile-title {
-        font-size: 24px;
-    }
-    
-    .profile-content {
-        padding: 15px;
-    }
-}
 </style>

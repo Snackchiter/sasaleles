@@ -26,7 +26,6 @@ const phoneError = ref('');
 const passwordError = ref('');
 const error = ref('');
 const success = ref('');
-const isLoading = ref(false);
 
 onMounted(() => {
     if (currentUser.value) {
@@ -92,10 +91,7 @@ function handleSubmit() {
     
     if (!validateFields()) {
         return;
-    }
-    
-    isLoading.value = true;
-    
+    } 
     try {
         const updatedData = {
             login: formData.login?.trim() || originalUserData.value?.login,
@@ -117,15 +113,8 @@ function handleSubmit() {
         formData.confirmPassword = '';
         
         emit('save', updatedData);
-        
-        setTimeout(() => {
-            emit('cancel');
-        }, 1500);
-        
     } catch (err) {
-        error.value = err.message || 'Ошибка при сохранении профиля';
-    } finally {
-        isLoading.value = false;
+        error.value = err.message;
     }
 }
 
@@ -140,11 +129,6 @@ function cancelEdit() {
             <h2>Редактирование профиля</h2>
             <p class="edit-subtitle">Измените нужные поля и сохраните изменения</p>
         </div>
-        
-        <div v-if="isLoading" class="loading-overlay">
-            <div class="spinner"></div>
-        </div>
-        
         <form @submit.prevent="handleSubmit" class="edit-form" novalidate>
             <div class="form-group">
                 <label class="form-label">
@@ -415,44 +399,4 @@ function cancelEdit() {
     font-size: 18px;
 }
 
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@media (max-width: 500px) {
-    .edit-header h2 {
-        font-size: 24px;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .cancel-btn,
-    .save-btn {
-        width: 100%;
-    }
-}
 </style>

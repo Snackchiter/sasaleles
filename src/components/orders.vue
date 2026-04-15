@@ -7,7 +7,6 @@ const router = useRouter();
 const { getUserOrders, currentUser} = useUsers();
 
 const orders = ref([]);
-const isLoading = ref(true);
 const selectedOrder = ref(null);
 const showModal = ref(false);
 
@@ -25,7 +24,6 @@ onMounted(() => {
 });
 
 function loadOrders() {
-    isLoading.value = true;
     try {
         orders.value = getUserOrders();
         orders.value.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -95,7 +93,7 @@ function goToCatalog() {
                 <div class="order-body">
                     <div class="order-items-preview">
                         <div class="preview-images">
-                            <img v-for="(item, index) in order.items.slice(0, 3)" :key="index":src="item.img" :alt="item.name" class="preview-image"/>
+                            <img v-for="item in order.items.slice(0, 3)" :key="item.id":src="item.img" :alt="item.name" class="preview-image"/>
                             <span v-if="order.items.length > 3" class="more-items"> +{{ order.items.length - 3 }}</span>
                         </div>
                         <div class="preview-names">{{ order.items.slice(0, 2).map(i => i.name).join(', ') }}
@@ -223,51 +221,6 @@ function goToCatalog() {
     font-weight: 600;
 }
 
-/* Состояния загрузки и пустого списка */
-.loading-state {
-    text-align: center;
-    padding: 80px 20px;
-    background: #f5f5f5;
-    border-radius: 16px;
-}
-
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #e0e0e0;
-    border-top-color: #2196F3;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    background: #f5f5f5;
-    border-radius: 16px;
-}
-
-.empty-icon {
-    font-size: 80px;
-    display: block;
-    margin-bottom: 20px;
-}
-
-.empty-state h2 {
-    font-size: 26px;
-    color: #333333;
-    margin-bottom: 10px;
-}
-
-.empty-state p {
-    color: #666666;
-    margin-bottom: 25px;
-}
 
 .catalog-btn {
     padding: 14px 32px;
@@ -287,7 +240,6 @@ function goToCatalog() {
     box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
-/* Статистика */
 .orders-stats {
     margin-bottom: 20px;
 }
@@ -297,7 +249,6 @@ function goToCatalog() {
     color: #666666;
 }
 
-/* Карточки заказов */
 .orders-list {
     display: flex;
     flex-direction: column;
@@ -473,7 +424,6 @@ function goToCatalog() {
     color: white;
 }
 
-/* Модальное окно */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -675,59 +625,5 @@ function goToCatalog() {
 
 .close-btn:hover {
     background: #1976D2;
-}
-
-@media (max-width: 600px) {
-    .orders-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    
-    .orders-title {
-        font-size: 26px;
-    }
-    
-    .order-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-    
-    .order-body {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .order-summary {
-        align-items: flex-start;
-        width: 100%;
-    }
-    
-    .order-total {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .order-meta {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .order-item {
-        flex-wrap: wrap;
-    }
-    
-    .item-quantity {
-        order: 3;
-        margin-left: 75px;
-    }
-    
-    .item-total {
-        order: 4;
-        width: 100%;
-        text-align: right;
-        margin-top: 10px;
-    }
 }
 </style>

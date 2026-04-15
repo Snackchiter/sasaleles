@@ -114,11 +114,13 @@ function addtocart(gameId) {
     padding: 30px 20px;
 }
 
-/* Hero секция */
 .hero {
     text-align: center;
     padding: 60px 20px;
     background-image: url(https://media1.tenor.com/m/ZZaiMKvs_BQAAAAC/ultrakill-v1.gif);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 10%;
     border-radius: 20px;
     margin-bottom: 50px;
 }
@@ -149,7 +151,6 @@ function addtocart(gameId) {
     box-shadow: 0 8px 20px rgba(33, 150, 243, 0.4);
 }
 
-/* Заголовок секции */
 
 .featured-section {
     margin-bottom: 60px;
@@ -183,7 +184,7 @@ function addtocart(gameId) {
     border-radius: 20px;
 }
 
-/* Сетка товаров */
+
 .products-wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -333,7 +334,6 @@ function addtocart(gameId) {
     border-top: 1px solid #c8e6c9;
 }
 
-/* Промо карточки */
 .promo-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -383,7 +383,6 @@ function addtocart(gameId) {
     box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
-/* Нет результатов */
 .nettovarov {
     text-align: center;
     padding: 60px 20px;
@@ -395,44 +394,5 @@ function addtocart(gameId) {
     font-size: 18px;
     color: #666666;
     margin-bottom: 20px;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 36px;
-    }
-    
-    .btn-cta {
-        padding: 14px 30px;
-        font-size: 16px;
-    }
-    
-    .section-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .products-wrapper {
-        grid-template-columns: 1fr;
-    }
-    
-    .promo-cards {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 40px 15px;
-    }
-    
-    .hero h1 {
-        font-size: 28px;
-    }
-    
-    .featured-section h2 {
-        font-size: 24px;
-    }
 }
 </style>
