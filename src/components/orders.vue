@@ -4,24 +4,12 @@ import { useRouter } from 'vue-router';
 import useUsers from '../composables/useUsers';
 
 const router = useRouter();
-const { getUserOrders, currentUser} = useUsers();
+const { getUserOrders} = useUsers();
 
 const orders = ref([]);
 const selectedOrder = ref(null);
 const showModal = ref(false);
 
-const isAuthenticated = computed(() => {
-    return currentUser.value && currentUser.value.login;
-});
-
-onMounted(() => {
-    if (!isAuthenticated.value) {
-        router.push({ name: 'log' });
-        return;
-    }
-    
-    loadOrders();
-});
 
 function loadOrders() {
     try {
@@ -30,6 +18,8 @@ function loadOrders() {
     } catch (error) {
     }
 }
+
+loadOrders()
 
 function formatDate(dateString) {
     const date = new Date(dateString);
