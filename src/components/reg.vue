@@ -12,8 +12,6 @@ const email = ref('');
 const phone = ref('');
 const country = ref('');
 const password = ref('');
-const error = ref('');
-
 const loginError = ref('');
 const emailError = ref('');
 const passwordError = ref('');
@@ -53,8 +51,6 @@ function validateFields() {
 }
 
 function handleSubmit() {
-    error.value = '';
-
     if (!validateFields()) {
         return;
     }
@@ -69,7 +65,6 @@ function handleSubmit() {
         });
         router.push({ name: 'glavnaya' });
     } catch (err) {
-        error.value = err.message;
     }
 }
 </script>

@@ -1,10 +1,8 @@
 <script setup>
 import { reactive, ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 import useUsers from '../composables/useUsers';
 
 const emit = defineEmits(['cancel', 'save']);
-const route = useRoute();
 const { findUser, editUser, currentUser } = useUsers();
 
 const formData = reactive({
@@ -24,8 +22,6 @@ const loginError = ref('');
 const emailError = ref('');
 const phoneError = ref('');
 const passwordError = ref('');
-const error = ref('');
-const success = ref('');
 
 onMounted(() => {
     if (currentUser.value) {
@@ -86,9 +82,6 @@ function validateFields() {
 }
 
 function handleSubmit() {
-    error.value = '';
-    success.value = '';
-    
     if (!validateFields()) {
         return;
     } 
@@ -105,8 +98,6 @@ function handleSubmit() {
         }
 
         editUser(formData.id, updatedData);
-        success.value = 'Профиль успешно обновлен!';
-        
         originalUserData.value = { ...originalUserData.value, ...updatedData };
         
         formData.newPassword = '';
@@ -114,7 +105,6 @@ function handleSubmit() {
         
         emit('save', updatedData);
     } catch (err) {
-        error.value = err.message;
     }
 }
 
@@ -135,7 +125,7 @@ function cancelEdit() {
                     <span class="label-icon">👤</span>
                     Логин
                 </label>
-                <input v-model="formData.login" type="text" :placeholder="originalUserData?.login || 'Введите логин'" :class="{ changed: formData.login !== originalUserData?.login }"/>
+                <input v-model="formData.login" type="text" :placeholder="originalUserData?.login || 'Введите логин'" />
                 <p v-if="loginError" class="error">{{ loginError }}</p>
                 <small v-if="originalUserData?.login" class="hint">Текущий: {{ originalUserData.login }}</small>
             </div>
@@ -145,7 +135,7 @@ function cancelEdit() {
                     <span class="label-icon">📧</span>
                     Email
                 </label>
-                <input v-model="formData.email" type="email" :placeholder="originalUserData?.email || 'Введите email'" :class="{ changed: formData.email !== originalUserData?.email }"/>
+                <input v-model="formData.email" type="email" :placeholder="originalUserData?.email || 'Введите email'"/>
                 <p v-if="emailError" class="error">{{ emailError }}</p>
                 <small v-if="originalUserData?.email" class="hint">Текущий: {{ originalUserData.email }}</small>
             </div>
@@ -155,7 +145,7 @@ function cancelEdit() {
                     <span class="label-icon">☏</span>
                     Телефон
                 </label>
-                <input v-model="formData.phone" type="tel" :placeholder="originalUserData?.phone || '+7 (999) 123-45-67'" :class="{ changed: formData.phone !== originalUserData?.phone }"/>
+                <input v-model="formData.phone" type="tel" :placeholder="originalUserData?.phone || '+7 (999) 123-45-67'" />
                 <p v-if="phoneError" class="error">{{ phoneError }}</p>
                 <small v-if="originalUserData?.phone" class="hint">Текущий: {{ originalUserData.phone || 'не указан' }}</small>
             </div>
@@ -165,7 +155,7 @@ function cancelEdit() {
                     <span class="label-icon">🌍</span>
                     Страна
                 </label>
-                <input v-model="formData.country" type="text" :placeholder="originalUserData?.country || 'Введите страну'" :class="{ changed: formData.country !== originalUserData?.country }"/>
+                <input v-model="formData.country" type="text" :placeholder="originalUserData?.country || 'Введите страну'" />
                 <small v-if="originalUserData?.country" class="hint">Текущая: {{ originalUserData.country }}</small>
             </div>
 
@@ -318,15 +308,6 @@ function cancelEdit() {
     margin-bottom: 20px;
 }
 
-.error-message,
-.success-message {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    border-radius: 10px;
-    font-size: 14px;
-}
 
 .error-message {
     background: #ffebee;
@@ -334,16 +315,7 @@ function cancelEdit() {
     border: 1px solid #ffcdd2;
 }
 
-.success-message {
-    background: #e8f5e9;
-    color: #2e7d32;
-    border: 1px solid #c8e6c9;
-}
 
-.error-icon,
-.success-icon {
-    font-size: 18px;
-}
 
 .form-actions {
     display: flex;

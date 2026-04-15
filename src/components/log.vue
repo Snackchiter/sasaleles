@@ -27,7 +27,6 @@ function validateForm() {
         passerror.value = 'Введите пароль';
         isValid = false;
     }
-
     return isValid;
 }
 

@@ -62,14 +62,14 @@ const isAuthenticated = computed(() => {
                         <span class="data-icon">☏</span>
                         <div class="data-content">
                             <span class="data-label">Телефон</span>
-                            <span class="data-value" :class="{ empty: !currentUser.phone }">{{ currentUser.phone || 'Не указано' }}</span>
+                            <span class="data-value">{{ currentUser.phone || 'Не указано' }}</span>
                         </div>
                     </div>
                     <div class="data-item">
                         <span class="data-icon">🌍</span>
                         <div class="data-content">
                             <span class="data-label">Страна</span>
-                            <span class="data-value" :class="{ empty: !currentUser.country }">{{ currentUser.country || 'Не указано' }}</span>
+                            <span class="data-value">{{ currentUser.country || 'Не указано' }}</span>
                         </div>
                     </div>
                 </div>

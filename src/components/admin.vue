@@ -73,9 +73,6 @@ const closeUsersModal = () => {
                         </div>
                     </div>
                 </div>
-                <div v-else class="no-users">
-                    <p>Нет зарегистрированных пользователей</p>
-                </div>
             </div>
             <div class="modal-footer">
                 <button class="close-modal-btn" @click="closeUsersModal">Закрыть</button>

@@ -8,8 +8,6 @@ const users = useUsers();
 
 const showOrderModal = ref(false);
 const lastOrder = ref(null);
-const errorMessage = ref('');
-
 const cartItems = computed(() => users.cart.value || []);
 const totalAmount = computed(() => users.getCartTotal());
 const totalItems = computed(() => users.getCartItemCount());
@@ -26,12 +24,6 @@ function increaseQuantity(item) {
     users.updateQuantity(item.id, item.quantity + 1);
 }
 
-function removeItem(itemId) {
-    if (confirm('Удалить товар из корзины?')) {
-        users.removeFromCart(itemId);
-    }
-}
-
 function proceedToCheckout() {
     if (!users.currentUser.value) {
         errorMessage.value = 'Необходимо авторизоваться';
@@ -46,7 +38,6 @@ function proceedToCheckout() {
         lastOrder.value = order;
         showOrderModal.value = true;
     } catch (error) {
-        errorMessage.value = error.message
     }
 }
 
@@ -71,10 +62,6 @@ function viewOrders() {
 
 function clearCart() {
         users.clearCart();
-}
-
-function closeError() {
-    errorMessage.value = '';
 }
 </script>
 
@@ -107,7 +94,7 @@ function closeError() {
                             <button @click="increaseQuantity(value)" class="quantity-btn">✚</button>
                         </div>
                         <div class="item-total">{{ Number(value.digit) * value.quantity }}₽</div>
-                        <button @click="removeItem(value.id)" class="remove-btn" title="Удалить">✖</button>
+                        <button @click="removeFromCart(value.id)" class="remove-btn" title="Удалить">✖</button>
                     </div>
                 </div>
                 
@@ -151,11 +138,6 @@ function closeError() {
                     <button @click="viewOrders" class="orders-btn">Мои заказы</button>
                 </div>
             </div>
-        </div>
-        
-        <div v-if="errorMessage" class="error-toast">
-            <span>{{ errorMessage }}</span>
-            <button @click="closeError" class="toast-close">✖</button>
         </div>
     </div>
 </template>
