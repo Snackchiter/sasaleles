@@ -46,8 +46,6 @@ const closeUsersModal = () => {
         <p>Нет доступных игр</p>
         <button class="add-first-game" @click="router.push({name: 'add'})">Добавить первую игру</button>
     </div>
-
-    <!-- Модальное окно для списка пользователей -->
     <div v-if="showUsersModal" class="modal-overlay" @click="closeUsersModal">
         <div class="modal-content" @click.stop>
             <div class="modal-header">

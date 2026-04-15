@@ -360,7 +360,6 @@ function loadUserCart(userId) {
         cart.value = [];
     }
 }
-
 function checkout() {  
     const order = {
         id: Date.now(),
