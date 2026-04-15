@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted } from 'vue';
+import { ref} from 'vue';
 import { useRouter } from 'vue-router';
 import useUsers from '../composables/useUsers';
 
