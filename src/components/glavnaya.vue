@@ -9,7 +9,7 @@ const games = useUsers();
 const gamesList = computed(() => games.gameList.value);
 
 const topGames = computed(() => {
-    return [...gamesList.value].sort((a, b) => b.digit - a.digit).slice(0, 6);
+    return [...gamesList.value].sort((a, b) => b.digit - a.digit).slice(0, 3);
 });
 
 const getCategoryName = (categoryId) => {
